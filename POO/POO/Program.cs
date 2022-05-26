@@ -11,22 +11,35 @@ namespace POO
         static void Main(string[] args)
         {
             var transportes = new List<TransportePublico>();
-            transportes.Add(new Omnibus(100, "1"));
-            transportes.Add(new Omnibus(30, "2"));
-            transportes.Add(new Omnibus(10, "3"));
-            transportes.Add(new Omnibus(5, "4"));
-            transportes.Add(new Omnibus(33, "5"));
-            transportes.Add(new Taxi(4, "1"));
-            transportes.Add(new Taxi(2, "2"));
-            transportes.Add(new Taxi(1, "3"));
-            transportes.Add(new Taxi(2, "4"));
-            transportes.Add(new Taxi(3, "5"));
+            for (int i = 0; i < 5; i++)
+            {
+                transportes.Add(new Omnibus(LeerCantidad("omnibus"), (i + 1).ToString()));
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                transportes.Add(new Taxi(LeerCantidad("taxi"), (i + 1).ToString()));
+            }
+
 
             foreach (var t in transportes)
             {
                 Console.WriteLine(t);
             }
             Console.ReadLine();
+        }
+
+        public static int LeerCantidad(string nombre)
+        {
+            Console.WriteLine($"Inserte cantidad de pasajeros para este {nombre}:");
+            string input = Console.ReadLine();
+            int number;
+            while (!Int32.TryParse(input, out number))
+            {
+                Console.WriteLine($"No era un numero entero");
+                Console.WriteLine($"Inserte cantidad de pasajeros para este {nombre}:");
+                input = Console.ReadLine();
+            }
+            return int.Parse(input);
         }
     }
 }
