@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab.Demo.EF.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,12 @@ namespace Lab.Demo.EF.UI
 {
     internal class Program
     {
+        EmployeesLogic employeesLogic = new EmployeesLogic();
         static void Main(string[] args)
         {
+            
         }
+
+        
     }
 }
