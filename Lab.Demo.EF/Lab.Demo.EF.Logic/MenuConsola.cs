@@ -3,6 +3,7 @@ using Lab.Demo.EF.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,11 @@ namespace Lab.Demo.EF.Logic
 
         public void Menu()
         {
-            while (true) {
+            while (true)
+            {
                 int opcion = LeerOpcion();
-                switch (opcion) {
+                switch (opcion)
+                {
                     case 1:
                         ListarEmpleados();
                         break;
@@ -54,7 +57,7 @@ namespace Lab.Demo.EF.Logic
             Console.WriteLine("5 Borrar una categoria");
             Console.WriteLine("6 Actualizar una categoria");
             Console.WriteLine("0 Salir");
-            
+
         }
 
         private int LeerOpcion()
@@ -62,8 +65,8 @@ namespace Lab.Demo.EF.Logic
             ImprimirOpciones();
             string input = Console.ReadLine();
             int number;
-            int[] opciones = { 0, 1, 2, 3, 4, 5 ,6};
-            while (!int.TryParse(input, out number) || !opciones.Contains (int.Parse(input)) )
+            int[] opciones = { 0, 1, 2, 3, 4, 5, 6 };
+            while (!int.TryParse(input, out number) || !opciones.Contains(int.Parse(input)))
             {
                 Console.WriteLine($"La opcion no existe, pruebe nuevamente");
                 ImprimirOpciones();
@@ -77,8 +80,8 @@ namespace Lab.Demo.EF.Logic
         {
             Console.WriteLine("Lista de Empleados");
             EmployeesLogic employeesLogic = new EmployeesLogic();
-            
-            foreach(var e in employeesLogic.GetAll())
+
+            foreach (var e in employeesLogic.GetAll())
             {
                 Console.WriteLine($"{e.LastName}, {e.FirstName}");
             }
@@ -122,7 +125,7 @@ namespace Lab.Demo.EF.Logic
             var descripcionNueva = Console.ReadLine();
             CategoriesLogic categoriesLogic = new CategoriesLogic();
             var idNuevo = categoriesLogic.GetNextId();
-            categoriesLogic.Add(new Categories() { CategoryID= idNuevo, CategoryName=nombreNuevo,Description=descripcionNueva,});
+            categoriesLogic.Add(new Categories() { CategoryID = idNuevo, CategoryName = nombreNuevo, Description = descripcionNueva, });
         }
 
         private void BorrarCategoria()
@@ -131,7 +134,7 @@ namespace Lab.Demo.EF.Logic
             Console.WriteLine("Introduzca el id de la categoria:(int)");
             var input = Console.ReadLine();
             int id;
-            while (!int.TryParse(input,out id))
+            while (!int.TryParse(input, out id))
             {
                 Console.WriteLine("No es entero");
                 Console.WriteLine("Borrar Categoria");
@@ -142,18 +145,27 @@ namespace Lab.Demo.EF.Logic
             try
             {
 
-            categoriesLogic.Delete(id);
-            }catch(IdCategoryNotFoundException e1)
+                categoriesLogic.Delete(id);
+            }
+            catch (IdCategoryNotFoundException e1)
             {
                 Console.WriteLine(e1.Message);
             }
             catch (DbUpdateException e)
             {
-                //Console.WriteLine(e.InnerException);
-                // Pongo este msj porque no se como validar que la InnerException es por la integridad referencial
-                // y dijeron que no mostraramos errores técnicos como seria e.InnerException
-                Console.WriteLine("Error al actualizar la base de datos, probablemente hay productos que tienen esta categoria, por lo tanto no puede ser borrada");
-                
+                Console.WriteLine("Error al actualizar la base de datos");
+                var ej = e.InnerException.GetType();
+                if (e.InnerException is System.Data.Entity.Core.UpdateException)
+                {
+                    if (e.InnerException.InnerException is SqlException)
+                    {
+                        var sqlex = (SqlException)e.InnerException.InnerException;
+                        if (sqlex.Number == 547)
+                        {
+                            Console.WriteLine("Hay productos que tienen esta categoria, por lo tanto no puede ser borrada");
+                        }
+                    }
+                }
             }
         }
 
@@ -181,7 +193,7 @@ namespace Lab.Demo.EF.Logic
             Console.WriteLine("Introduzca la nueva descripcion:");
             var descripcionNueva = Console.ReadLine();
 
-        CategoriesLogic categoriesLogic = new CategoriesLogic();
+            CategoriesLogic categoriesLogic = new CategoriesLogic();
             var categoriaModificada = new Categories()
             {
                 CategoryID = id,
@@ -191,16 +203,13 @@ namespace Lab.Demo.EF.Logic
             try
             {
                 categoriesLogic.Update(categoriaModificada);
-            }catch (IdCategoryNotFoundException e1)
+            }
+            catch (IdCategoryNotFoundException e1)
             {
                 Console.WriteLine(e1.Message);
             }
-            catch (DbUpdateException e2)
+            catch (Exception)
             {
-                
-                Console.WriteLine("Error al actualizar la base de datos");
-            }
-            catch (Exception){
                 Console.WriteLine("Error al actualizar la base de datos");
             }
         }
