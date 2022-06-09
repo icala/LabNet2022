@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{43A9CE1C-9822-491D-8A92-220AA2734FEA}</ProjectGuid>
+    <ProjectGuid>{AB2187FD-4322-4770-9B93-41DFF915CABD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lab.Demo.EF.Logic</RootNamespace>
-    <AssemblyName>Lab.Demo.EF.Logic</AssemblyName>
+    <RootNamespace>Lab.Demo.EF.Common</RootNamespace>
+    <AssemblyName>Lab.Demo.EF.Common</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,14 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,31 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseLogic.cs" />
-    <Compile Include="CategoriesLogic.cs" />
-    <Compile Include="CustomersLogic.cs" />
-    <Compile Include="EmployeesLogic.cs" />
-    <Compile Include="IABMLogic.cs" />
-    <Compile Include="MenuConsola.cs" />
+    <Compile Include="NotFoundIdCategoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lab.Demo.EF.Common\Lab.Demo.EF.Common.csproj">
-      <Project>{AB2187FD-4322-4770-9B93-41DFF915CABD}</Project>
-      <Name>Lab.Demo.EF.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lab.Demo.EF.Data\Lab.Demo.EF.Data.csproj">
-      <Project>{B812C976-598A-4F9E-8C72-7F52F656422E}</Project>
-      <Name>Lab.Demo.EF.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lab.Demo.EF.Entities\Lab.Demo.EF.Entities.csproj">
-      <Project>{13391C24-225E-47B6-8E52-3ADB085B7B11}</Project>
-      <Name>Lab.Demo.EF.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

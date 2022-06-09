@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Lab.Demo.EF.Common;
 
 namespace Lab.Demo.EF.Logic
 {
@@ -19,7 +20,7 @@ namespace Lab.Demo.EF.Logic
         public void Delete(int id)
         {
             var categoriaABorrar = context.Categories.FirstOrDefault(c => c.CategoryID == id);
-            if (categoriaABorrar == null) throw new Exception("No existe categoria con ese id");
+            if (categoriaABorrar == null) throw new IdCategoryNotFoundException();
             context.Categories.Remove(categoriaABorrar);
             context.SaveChanges();
         }
@@ -31,18 +32,20 @@ namespace Lab.Demo.EF.Logic
 
         public void Update(Categories item)
         {
-            Categories categoriaUpdate = context.Categories.Find(item.CategoryID);
+            Categories categoriaUpdate = context.Categories.FirstOrDefault(c => c.CategoryID == item.CategoryID);
+            if (categoriaUpdate == null) throw new IdCategoryNotFoundException();
             categoriaUpdate.Description = item.Description;
             categoriaUpdate.CategoryName = item.CategoryName;
             context.SaveChanges();
+
         }
 
         public int GetNextId()
         {
-             var ultimaCat = context.Categories.OrderByDescending(c => c.CategoryID).FirstOrDefault();
-             if(ultimaCat == null)
+            var ultimaCat = context.Categories.OrderByDescending(c => c.CategoryID).FirstOrDefault();
+            if (ultimaCat == null)
                 return 1;
-             return ultimaCat.CategoryID;
+            return ultimaCat.CategoryID;
         }
 
 

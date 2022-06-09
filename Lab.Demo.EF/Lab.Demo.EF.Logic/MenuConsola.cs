@@ -1,4 +1,5 @@
-﻿using Lab.Demo.EF.Entities;
+﻿using Lab.Demo.EF.Common;
+using Lab.Demo.EF.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -109,12 +110,12 @@ namespace Lab.Demo.EF.Logic
         private void CrearCategoria()
         {
             Console.WriteLine("Crear Categoria");
-            Console.WriteLine("Introduzca el nombre:");
+            Console.WriteLine("Introduzca el nombre(15 Caracteres max.):");
             var nombreNuevo = Console.ReadLine();
-            while (nombreNuevo.Length == 0)
+            while (nombreNuevo.Length == 0 || nombreNuevo.Length > 15)
             {
                 Console.WriteLine("Campo obligatorio");
-                Console.WriteLine("Introduzca el nombre:");
+                Console.WriteLine("Introduzca el nombre(15 Caracteres max.):");
                 nombreNuevo = Console.ReadLine();
             }
             Console.WriteLine("Introduzca descripcion:");
@@ -142,13 +143,16 @@ namespace Lab.Demo.EF.Logic
             {
 
             categoriesLogic.Delete(id);
+            }catch(IdCategoryNotFoundException e1)
+            {
+                Console.WriteLine(e1.Message);
             }
             catch (DbUpdateException e)
             {
                 //Console.WriteLine(e.InnerException);
                 // Pongo este msj porque no se como validar que la InnerException es por la integridad referencial
                 // y dijeron que no mostraramos errores técnicos como seria e.InnerException
-                Console.WriteLine("Error al actualizar la base de datos, probablemente hay productos que tienen esta categoria por lo tanto no puede ser borrada");
+                Console.WriteLine("Error al actualizar la base de datos, probablemente hay productos que tienen esta categoria, por lo tanto no puede ser borrada");
                 
             }
         }
@@ -166,12 +170,12 @@ namespace Lab.Demo.EF.Logic
                 Console.WriteLine("Introduzca el id de la categoria:(int)");
                 input = Console.ReadLine();
             }
-            Console.WriteLine("Introduzca el nuevo nombre:");
+            Console.WriteLine("Introduzca el nuevo nombre:(15 Caracteres max.):");
             var nombreNuevo = Console.ReadLine();
-            while (nombreNuevo.Length == 0)
+            while (nombreNuevo.Length == 0 || nombreNuevo.Length > 15)
             {
                 Console.WriteLine("Campo obligatorio");
-                Console.WriteLine("Introduzca el nuevo nombre:");
+                Console.WriteLine("Introduzca el nuevo nombre:(15 Caracteres max.):");
                 nombreNuevo = Console.ReadLine();
             }
             Console.WriteLine("Introduzca la nueva descripcion:");
@@ -187,9 +191,9 @@ namespace Lab.Demo.EF.Logic
             try
             {
                 categoriesLogic.Update(categoriaModificada);
-            }catch (NullReferenceException e1)
+            }catch (IdCategoryNotFoundException e1)
             {
-                Console.WriteLine("El id de la categoria a modificar no existe");
+                Console.WriteLine(e1.Message);
             }
             catch (DbUpdateException e2)
             {
