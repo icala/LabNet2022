@@ -12,7 +12,8 @@ namespace Lab.Demo.EF.UI
         EmployeesLogic employeesLogic = new EmployeesLogic();
         static void Main(string[] args)
         {
-            
+            var menu = new MenuConsola();
+            menu.Menu();
         }
 
         

@@ -7,26 +7,28 @@ using System.Threading.Tasks;
 
 namespace Lab.Demo.EF.Logic
 {
-    public class EmployeesLogic:BaseLogic,IABMLogic<Employees>
+    public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
-        public List<Employees> GetAll()
-        {
-            return context.Employees.ToList();
-        }
-
-        void IABMLogic<Employees>.Add(Employees item)
+        public void Add(Customers item)
         {
             throw new NotImplementedException();
         }
 
-        void IABMLogic<Employees>.Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        void IABMLogic<Employees>.Update(Employees item)
+        public List<Customers> GetAll()
+        {
+            return context.Customers.ToList();
+        }
+
+        public void Update(Customers item)
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
