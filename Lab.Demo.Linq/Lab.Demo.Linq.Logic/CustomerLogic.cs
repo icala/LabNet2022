@@ -23,12 +23,32 @@ namespace Lab.Demo.Linq.Logic
         {
             return context.Customers.ToList();
         }
-
         public Customers GetFirstThatAddressContains(string cadena)
         {
             return context.Customers.First(c => c.Address.Contains(cadena));
         }
 
+        public List<Customers> GetAllFromWARegion()
+        {
+            return context.Customers.Where(c => c.Region == "WA").ToList();
+        }
+
+        public List<string> GetNames()
+        {
+            var query = from c in context.Customers
+                        select c.CompanyName;
+
+            return query.ToList();
+        }
+
+        public List<Tuple<Customers,Orders>> GetFromWARegionAndNewerThan19970101() {
+            var query = from c in context.Customers
+                        join o in context.Orders on c.CustomerID equals o.CustomerID
+                        where c.Region == "WA" && o.OrderDate > new DateTime(1997, 1, 1)
+                        select new {c,o};
+
+            return query.AsEnumerable().Select(t => new Tuple<Customers, Orders>(t.c,t.o)).ToList();
+        }
         public void Update(Customers item)
         {
             throw new NotImplementedException();

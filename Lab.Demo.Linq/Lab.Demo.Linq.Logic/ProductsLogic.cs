@@ -31,7 +31,25 @@ namespace Lab.Demo.Linq.Logic
 
         public List<Products> GetOutOfStock()
         {
-            return context.Products.Where(p => p.UnitsInStock < 1).ToList();
+            var query = context.Products
+                        .Where(p => p.UnitsInStock < 1);    
+            
+            return query.ToList();
+        }
+
+
+        public List<Products> GetInStockAndItCostsOver3()
+        {
+            var query = from p in context.Products
+                        where p.UnitsInStock > 0 &&  p.UnitPrice > 3
+                        select p;
+
+            return query.ToList();
+        }
+
+        public Products GetId789OrNull()
+        {
+            return context.Products.FirstOrDefault(p => p.ProductID == 789);
         }
     }
 }
