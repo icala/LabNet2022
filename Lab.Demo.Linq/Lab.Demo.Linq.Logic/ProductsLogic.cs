@@ -21,9 +21,23 @@ namespace Lab.Demo.Linq.Logic
 
         public List<Products> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Products.ToList();
         }
+        public List<Products> GetAllOrderByName()
+        {
+            return context.Products.OrderBy(p=> p.ProductName).ToList();
+        }
+        public List<Products> GetAllOrderByUnitsInStockDescending()
+        {
+            return context.Products.OrderByDescending(p=> p.UnitsInStock).ToList();
+        }
+        public Products GetFirstProduct()
+        {
+            var query = from p in context.Products
+                        select p;
 
+            return query.First();
+        }
         public void Update(Products item)
         {
             throw new NotImplementedException();

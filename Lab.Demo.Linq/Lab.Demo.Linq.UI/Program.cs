@@ -11,13 +11,19 @@ namespace Lab.Demo.Linq.UI
     {
         static void Main(string[] args)
         {
-            //Ej1();
-            //Ej2();
-            //Ej3();
-            //Ej4();
-            //Ej5();
-            //Ej6();
+            Ej1();
+            Ej2();
+            Ej3();
+            Ej4();
+            Ej5();
+            Ej6();
             Ej7();
+            Ej8();
+            Ej9();
+            Ej10();
+            Ej11();
+            Ej12();
+            Ej13();
         }
 
         static void Ej1()
@@ -106,7 +112,7 @@ namespace Lab.Demo.Linq.UI
             Console.WriteLine("Nombres de clientes");
             var customerLogic = new CustomerLogic();
             var nombres = customerLogic.GetNames();
-            foreach(var n in nombres)
+            foreach (var n in nombres)
             {
                 Console.WriteLine($"{n.ToLower()} - {n.ToUpper()}");
             }
@@ -125,8 +131,98 @@ namespace Lab.Demo.Linq.UI
                 Console.WriteLine($"{t.Item1.CompanyName} - {t.Item2.OrderID} - {t.Item2.OrderDate}");
             }
             Console.ReadKey(); ;
-            
+
         }
 
+        static void Ej8()
+        {
+
+            Console.Clear();
+            Console.WriteLine("Ejercicio 8");
+            Console.WriteLine("3 primeros clientes de la region WA");
+            var customerLogic = new CustomerLogic();
+            var clientes = customerLogic.GetFirst3FromWARegion();
+            foreach (var c in clientes)
+            {
+                Console.WriteLine($"{c.CustomerID}  -  {c.CompanyName}");
+            }
+            Console.ReadKey(); ;
+        }
+
+        static void Ej9()
+        {
+            Console.Clear();
+            Console.WriteLine("Ejercicio 9");
+            Console.WriteLine("Productos ordenados por nombre");
+            var productsLogic = new ProductsLogic();
+            var productos = productsLogic.GetAllOrderByName();
+            foreach (var p in productos)
+            {
+                Console.WriteLine($"{p.ProductID}  -  {p.ProductName}");
+            }
+            Console.ReadKey(); ;
+        }
+        static void Ej10()
+        {
+
+            Console.Clear();
+            Console.WriteLine("Ejercicio 10");
+            Console.WriteLine("Productos ordenados por UnitInStock descendente");
+            var productsLogic = new ProductsLogic();
+            var productos = productsLogic.GetAllOrderByUnitsInStockDescending();
+            foreach (var p in productos)
+            {
+                Console.WriteLine($"{p.ProductID}  -  {p.ProductName}  -  {p.UnitsInStock}");
+            }
+            Console.ReadKey(); ;
+        }
+
+        static void Ej11()
+        {
+            Console.Clear();
+            Console.WriteLine("Ejercicio 11");
+            Console.WriteLine("Categorias asociadas con productos");
+            var categoriesLogic = new CategoriesLogic();
+            var categorias = categoriesLogic.GetAllAssociated();
+            foreach (var c in categorias)
+            {
+                Console.WriteLine($"{c.CategoryID}  -  {c.CategoryName}");
+            }
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("");
+            Console.WriteLine("Todas las categorias");
+            var categorias2 = categoriesLogic.GetAll();
+            foreach (var c in categorias2)
+            {
+                Console.WriteLine($"{c.CategoryID}  -  {c.CategoryName}");
+            }
+            Console.ReadKey(); ;
+        }
+
+        static void Ej12()
+        {
+            Console.Clear();
+            Console.WriteLine("Ejercicio 12");
+            Console.WriteLine("Primer Producto de una lista");
+            var productsLogic = new ProductsLogic();
+            var p = productsLogic.GetFirstProduct();
+            Console.WriteLine($"{p.ProductID}  -  {p.ProductName}  -  {p.UnitsInStock}");
+            Console.ReadKey(); ;
+        }
+
+        static void Ej13()
+        {
+
+            Console.Clear();
+            Console.WriteLine("Ejercicio 13");
+            Console.WriteLine("Clientes con la cantidad de ordenes asociadas");
+            var customerLogic = new CustomerLogic();
+            var tuplas = customerLogic.GetCustomersAndAssociatedOrdersQuantity();
+            foreach (var t in tuplas)
+            {
+                Console.WriteLine($"{t.Item1.CustomerID} - {t.Item1.CompanyName} - Ordenes asociadas: {t.Item2}");
+            }
+            Console.ReadKey(); ;
+        }
     }
 }

@@ -33,6 +33,9 @@ namespace Lab.Demo.Linq.Logic
             return context.Customers.Where(c => c.Region == "WA").ToList();
         }
 
+        public List<Customers> GetFirst3FromWARegion(){
+            return context.Customers.Where(c => c.Region == "WA").Take(3).ToList();
+        }
         public List<string> GetNames()
         {
             var query = from c in context.Customers
@@ -49,6 +52,17 @@ namespace Lab.Demo.Linq.Logic
 
             return query.AsEnumerable().Select(t => new Tuple<Customers, Orders>(t.c,t.o)).ToList();
         }
+
+        public List<Tuple<Customers, int>> GetCustomersAndAssociatedOrdersQuantity()
+        {
+            var query = from c in context.Customers
+                        join o in context.Orders on c.CustomerID equals o.CustomerID
+                        group c by c.CustomerID into gr
+                        select new {cust = gr.FirstOrDefault(), cant = gr.Count()};
+
+            return query.AsEnumerable().Select(item => new Tuple<Customers, int>(item.cust, item.cant )).ToList();
+        }
+
         public void Update(Customers item)
         {
             throw new NotImplementedException();
