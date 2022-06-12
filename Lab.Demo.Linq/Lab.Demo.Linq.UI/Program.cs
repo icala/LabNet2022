@@ -28,21 +28,26 @@ namespace Lab.Demo.Linq.UI
 
         static void Ej1()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 1");
             Console.WriteLine("Consulta que devuelve el primer cliente que tiene 'Hanover' en la direccion:");
-            var customeLogic = new CustomerLogic();
-            var customer = customeLogic.GetFirstThatAddressContains("Hanover");
-            Console.WriteLine($"Company Name:{customer.CompanyName}");
-            Console.WriteLine($"Address:{customer.Address}");
+            try
+            {
+                var customeLogic = new CustomerLogic();
+                var customer = customeLogic.GetFirstThatAddressContains("Hanover");
+                Console.WriteLine($"Company Name:{customer.CompanyName}");
+                Console.WriteLine($"Address:{customer.Address}");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("La lista está vacia, no tiene primer elemento");
+            }
             Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey();
         }
 
         static void Ej2()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 2");
             Console.WriteLine("Productos sin stock:");
@@ -52,12 +57,12 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{p.ProductID}  -  {p.ProductName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey();
         }
 
         static void Ej3()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 3");
             Console.WriteLine("Productos en stock que valen mas de 3");
@@ -67,11 +72,11 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{p.ProductID}  -  {p.ProductName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
         static void Ej4()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 4");
             Console.WriteLine("Clientes de la region WA");
@@ -81,12 +86,12 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{c.CustomerID}  -  {c.CompanyName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
         static void Ej5()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 5");
             Console.WriteLine("Producto con id = 789 o null");
@@ -100,13 +105,13 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.Write("null");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
 
         static void Ej6()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 6");
             Console.WriteLine("Nombres de clientes");
@@ -130,13 +135,12 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{t.Item1.CompanyName} - {t.Item2.OrderID} - {t.Item2.OrderDate}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
-
         }
 
         static void Ej8()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 8");
             Console.WriteLine("3 primeros clientes de la region WA");
@@ -146,6 +150,7 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{c.CustomerID}  -  {c.CompanyName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
@@ -160,11 +165,11 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{p.ProductID}  -  {p.ProductName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
         static void Ej10()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 10");
             Console.WriteLine("Productos ordenados por UnitInStock descendente");
@@ -174,6 +179,7 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{p.ProductID}  -  {p.ProductName}  -  {p.UnitsInStock}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
@@ -196,6 +202,7 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{c.CategoryID}  -  {c.CategoryName}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
@@ -204,15 +211,22 @@ namespace Lab.Demo.Linq.UI
             Console.Clear();
             Console.WriteLine("Ejercicio 12");
             Console.WriteLine("Primer Producto de una lista");
-            var productsLogic = new ProductsLogic();
-            var p = productsLogic.GetFirstProduct();
-            Console.WriteLine($"{p.ProductID}  -  {p.ProductName}  -  {p.UnitsInStock}");
+            try
+            {
+                var productsLogic = new ProductsLogic();
+                var p = productsLogic.GetFirstProduct();
+                Console.WriteLine($"{p.ProductID}  -  {p.ProductName}  -  {p.UnitsInStock}");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("La lista está vacia, no tiene primer elemento");
+            }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
 
         static void Ej13()
         {
-
             Console.Clear();
             Console.WriteLine("Ejercicio 13");
             Console.WriteLine("Clientes con la cantidad de ordenes asociadas");
@@ -222,6 +236,7 @@ namespace Lab.Demo.Linq.UI
             {
                 Console.WriteLine($"{t.Item1.CustomerID} - {t.Item1.CompanyName} - Ordenes asociadas: {t.Item2}");
             }
+            Console.WriteLine("Presione una tecla para continuar");
             Console.ReadKey(); ;
         }
     }
