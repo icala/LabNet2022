@@ -15,9 +15,11 @@ namespace Lab.Demo.EF.MVC.Controllers
     public class CategoriesController : Controller
     {
         CategoriesLogic categoriesLogic;
+        ProductsLogic productsLogic;
         public CategoriesController()
         {
             categoriesLogic = new CategoriesLogic();
+            productsLogic = new ProductsLogic();
         }
         // GET: Categories
         public ActionResult Index()
@@ -31,7 +33,14 @@ namespace Lab.Demo.EF.MVC.Controllers
         // GET: Categories/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var category = categoriesLogic.GetCategoryById(id);
+            var products = productsLogic.GetFromCategory(id);
+            var productsDTO = products.Select(p => new ProductsDTO(p)).ToList();
+            var model = new CategoriesDatailsDTO() {
+                Category = new CategoriesDTO(category),
+                Products = productsDTO
+            };
+            return View(model);
         }
 
         // GET: Categories/Create
@@ -129,7 +138,7 @@ namespace Lab.Demo.EF.MVC.Controllers
                         if (sqlex.Number == 547)
                         {
                             var errorMsg = "Hay productos que tienen esta categoria, por lo tanto no puede ser borrada";
-                            return View("ErrorInfo",new ErrorForView(){ ErrorMsg = errorMsg });
+                            return View("ErrorInfo", new ErrorForView() { ErrorMsg = errorMsg });
                         }
                     }
                 }

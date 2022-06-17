@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Lab.Demo.EF.MVC.Models.CategoriesDTO>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Categorias";
 }
 
-<h2>View</h2>
+<h2>Categorias</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nueva", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.CategoryID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.CategoryID }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.CategoryID })
         </td>
     </tr>
 }

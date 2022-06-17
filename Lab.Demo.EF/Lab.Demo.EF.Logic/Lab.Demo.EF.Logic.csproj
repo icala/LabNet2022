@@ -54,6 +54,7 @@
     <Compile Include="EmployeesLogic.cs" />
     <Compile Include="IABMLogic.cs" />
     <Compile Include="MenuConsola.cs" />
+    <Compile Include="ProductsLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

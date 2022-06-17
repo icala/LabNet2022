@@ -1,0 +1,61 @@
+﻿@model Lab.Demo.EF.MVC.Models.CategoriesDatailsDTO
+
+@{
+    ViewBag.Title = "Detalles de la Categoria";
+}
+
+<h2>Lista de Produtos de la Categoria</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Description)
+        </dd>
+
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Id de producto
+        </th>
+        <th>
+            Nombre del Producto
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model.Products)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Category.CategoryID }) |
+    @Html.ActionLink("Volver a la Lista", "Index")
+</p>

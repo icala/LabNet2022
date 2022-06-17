@@ -13,7 +13,9 @@ namespace Lab.Demo.EF.MVC.Models
         public int CategoryID { get; set; }
         [Required]
         [StringLength(15)]
+        [Display(Name = "Nombre de la Categoria")]
         public string CategoryName { get; set; }
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
         public CategoriesDTO()
         {
