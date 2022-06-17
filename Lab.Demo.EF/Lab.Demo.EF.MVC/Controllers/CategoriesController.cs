@@ -4,6 +4,8 @@ using Lab.Demo.EF.Logic;
 using Lab.Demo.EF.MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -95,18 +97,43 @@ namespace Lab.Demo.EF.MVC.Controllers
         // GET: Categories/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var category = categoriesLogic.GetCategoryById(id);
+            var categoryDTO = new CategoriesDTO(category);
+            return View(categoryDTO);
         }
 
         // POST: Categories/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(CategoriesDTO category)
         {
             try
             {
-                // TODO: Add delete logic here
+                categoriesLogic.Delete(category.CategoryID);
 
                 return RedirectToAction("Index");
+            }
+
+            catch (IdCategoryNotFoundException e1)
+            {
+                return View();
+            }
+            catch (DbUpdateException e)
+            {
+                //Console.WriteLine("Error al actualizar la base de datos");
+                var ej = e.InnerException.GetType();
+                if (e.InnerException is System.Data.Entity.Core.UpdateException)
+                {
+                    if (e.InnerException.InnerException is SqlException)
+                    {
+                        var sqlex = (SqlException)e.InnerException.InnerException;
+                        if (sqlex.Number == 547)
+                        {
+                            var errorMsg = "Hay productos que tienen esta categoria, por lo tanto no puede ser borrada";
+                            return View("ErrorInfo",new ErrorForView(){ ErrorMsg = errorMsg });
+                        }
+                    }
+                }
+                return View();
             }
             catch
             {
