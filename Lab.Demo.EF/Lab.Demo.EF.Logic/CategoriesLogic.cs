@@ -30,6 +30,18 @@ namespace Lab.Demo.EF.Logic
             return context.Categories.ToList();
         }
 
+        public Categories GetCategoryById(int idCategory)
+        {
+            try
+            {
+            return context.Categories.Find(idCategory);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new IdCategoryNotFoundException();
+            }              
+        }
+
         public void Update(Categories item)
         {
             Categories categoriaUpdate = context.Categories.FirstOrDefault(c => c.CategoryID == item.CategoryID);
