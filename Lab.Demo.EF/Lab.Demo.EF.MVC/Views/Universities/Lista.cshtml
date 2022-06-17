@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Lab.Demo.EF.MVC.Models.UniversidadDTO>
+
+@{
+    ViewBag.Title = "Universidades";
+}
+
+<h2>Universidades</h2>
+@Html.ActionLink("Volver a buscar", "Index")
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StateProvince)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.alpha_two_code)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0) {
+        <p>No se encontraron universidades </p>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateProvince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.alpha_two_code)
+            </td>
+
+        </tr>
+    }
+</table>
+    @Html.ActionLink("Volver a Home", "Index", "Home")
