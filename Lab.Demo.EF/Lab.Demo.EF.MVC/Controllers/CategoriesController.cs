@@ -40,11 +40,13 @@ namespace Lab.Demo.EF.MVC.Controllers
 
         // POST: Categories/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CategoriesDTO category)
         {
             try
             {
-                // TODO: Add insert logic here
+                var idNuevo = categoriesLogic.GetNextId();
+                categoriesLogic.Add(new Categories() { CategoryID = idNuevo, CategoryName = category.CategoryName, Description = category.Description, });
+
 
                 return RedirectToAction("Index");
             }
