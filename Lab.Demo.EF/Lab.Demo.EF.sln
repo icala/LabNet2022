@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Demo.EF.Common", "Lab.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Demo.EF.MVC", "Lab.Demo.EF.MVC\Lab.Demo.EF.MVC.csproj", "{CEEF8147-A724-4EF2-91D5-31A5B1888B9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Demo.EF.API", "Lab.Demo.EF.API\Lab.Demo.EF.API.csproj", "{3AE9EF24-15A3-4A60-B117-5BC46FD417ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{CEEF8147-A724-4EF2-91D5-31A5B1888B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEEF8147-A724-4EF2-91D5-31A5B1888B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEEF8147-A724-4EF2-91D5-31A5B1888B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE9EF24-15A3-4A60-B117-5BC46FD417ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE9EF24-15A3-4A60-B117-5BC46FD417ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE9EF24-15A3-4A60-B117-5BC46FD417ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE9EF24-15A3-4A60-B117-5BC46FD417ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
