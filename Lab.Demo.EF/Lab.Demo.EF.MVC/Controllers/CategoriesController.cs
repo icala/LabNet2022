@@ -93,12 +93,10 @@ namespace Lab.Demo.EF.MVC.Controllers
             }
             catch (IdCategoryNotFoundException e1)
             {
-                //Console.WriteLine(e1.Message);
                 return View();
             }
             catch
             {
-                Console.WriteLine("Error al actualizar la base de datos");
                 return View();
             }
         }
