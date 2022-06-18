@@ -216,6 +216,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -245,6 +246,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab.Demo.EF.Entities\Lab.Demo.EF.Entities.csproj">
+      <Project>{13391C24-225E-47B6-8E52-3ADB085B7B11}</Project>
+      <Name>Lab.Demo.EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lab.Demo.EF.Logic\Lab.Demo.EF.Logic.csproj">
+      <Project>{43A9CE1C-9822-491D-8A92-220AA2734FEA}</Project>
+      <Name>Lab.Demo.EF.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

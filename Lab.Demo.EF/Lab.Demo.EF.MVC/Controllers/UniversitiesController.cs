@@ -1,4 +1,5 @@
-﻿using Lab.Demo.EF.MVC.Models;
+﻿
+using Lab.Demo.EF.Entities.DTOs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

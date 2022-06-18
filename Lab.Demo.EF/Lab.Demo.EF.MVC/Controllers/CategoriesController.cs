@@ -1,7 +1,7 @@
 ﻿using Lab.Demo.EF.Common;
 using Lab.Demo.EF.Entities;
+using Lab.Demo.EF.Entities.DTOs;
 using Lab.Demo.EF.Logic;
-using Lab.Demo.EF.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;

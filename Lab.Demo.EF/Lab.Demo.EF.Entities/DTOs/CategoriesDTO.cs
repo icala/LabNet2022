@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Lab.Demo.EF.MVC.Models
+namespace Lab.Demo.EF.Entities.DTOs
 {
     public class CategoriesDTO
     {
