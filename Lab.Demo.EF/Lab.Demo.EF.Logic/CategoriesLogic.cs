@@ -59,7 +59,7 @@ namespace Lab.Demo.EF.Logic
                 throw new IdCategoryNotFoundException();
             }              
         }
-        public async Task<Categories> GetCategoryByIdAsync(int idCategory)
+        public virtual async Task<Categories> GetCategoryByIdAsync(int idCategory)
         {
             try
             {

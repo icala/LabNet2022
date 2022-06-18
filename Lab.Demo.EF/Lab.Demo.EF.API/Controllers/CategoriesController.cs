@@ -21,6 +21,11 @@ namespace Lab.Demo.EF.API.Controllers
         {
             categoriesLogic = new CategoriesLogic();
         }
+        public CategoriesController(CategoriesLogic categoriesLogic)
+        {
+            this.categoriesLogic = categoriesLogic;
+        }
+
         // GET: api/Categories
         public async Task<IEnumerable<CategoriesDTO>> Get()
         {
