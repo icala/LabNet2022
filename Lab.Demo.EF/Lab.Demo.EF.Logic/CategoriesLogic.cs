@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Lab.Demo.EF.Common;
+using System.Data.Entity;
 
 namespace Lab.Demo.EF.Logic
 {
@@ -30,11 +31,27 @@ namespace Lab.Demo.EF.Logic
             return context.Categories.ToList();
         }
 
+        public async Task<List<Categories>> GetAllAsync()
+        {
+            return await context.Categories.ToListAsync();
+        }
+
         public Categories GetCategoryById(int idCategory)
         {
             try
             {
             return context.Categories.Find(idCategory);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new IdCategoryNotFoundException();
+            }              
+        }
+        public async Task<Categories> GetCategoryByIdAsync(int idCategory)
+        {
+            try
+            {
+            return await context.Categories.FindAsync(idCategory);
             }
             catch (InvalidOperationException)
             {

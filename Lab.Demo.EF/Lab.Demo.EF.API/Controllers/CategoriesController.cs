@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Lab.Demo.EF.API.Controllers
@@ -21,19 +22,19 @@ namespace Lab.Demo.EF.API.Controllers
             categoriesLogic = new CategoriesLogic();
         }
         // GET: api/Categories
-        public IEnumerable<CategoriesDTO> Get()
+        public async Task<IEnumerable<CategoriesDTO>> Get()
         {
-            var categories = categoriesLogic.GetAll();
+            var categories = await categoriesLogic.GetAllAsync();
             var categoriesDTO = categories.Select(c => new CategoriesDTO(c));
             return categoriesDTO;
         }
 
         // GET: api/Categories/5
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             try
             {
-                var category = categoriesLogic.GetCategoryById(id);
+                var category = await categoriesLogic.GetCategoryByIdAsync(id);
                 return Ok(new CategoriesDTO(category));
             }
             catch (NullReferenceException)
