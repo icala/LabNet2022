@@ -17,6 +17,11 @@ namespace Lab.Demo.EF.Logic
             context.Categories.Add(item);
             context.SaveChanges();
         }
+        public async Task AddAsync(Categories item)
+        {
+            context.Categories.Add(item);
+            await context.SaveChangesAsync();
+        }
 
         public void Delete(int id)
         {
@@ -24,6 +29,13 @@ namespace Lab.Demo.EF.Logic
             if (categoriaABorrar == null) throw new IdCategoryNotFoundException();
             context.Categories.Remove(categoriaABorrar);
             context.SaveChanges();
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var categoriaABorrar = await context.Categories.FirstOrDefaultAsync(c => c.CategoryID == id);
+            if (categoriaABorrar == null) throw new IdCategoryNotFoundException();
+            context.Categories.Remove(categoriaABorrar);
+            await context.SaveChangesAsync();
         }
 
         public List<Categories> GetAll()
@@ -66,17 +78,14 @@ namespace Lab.Demo.EF.Logic
             categoriaUpdate.Description = item.Description;
             categoriaUpdate.CategoryName = item.CategoryName;
             context.SaveChanges();
-
         }
-
-        public int GetNextId()
+        public async Task UpdateAsync(Categories item)
         {
-            var ultimaCat = context.Categories.OrderByDescending(c => c.CategoryID).FirstOrDefault();
-            if (ultimaCat == null)
-                return 1;
-            return ultimaCat.CategoryID;
+            Categories categoriaUpdate = await context.Categories.FirstOrDefaultAsync(c => c.CategoryID == item.CategoryID);
+            if (categoriaUpdate == null) throw new IdCategoryNotFoundException();
+            categoriaUpdate.Description = item.Description;
+            categoriaUpdate.CategoryName = item.CategoryName;
+            await context.SaveChangesAsync();
         }
-
-
     }
 }

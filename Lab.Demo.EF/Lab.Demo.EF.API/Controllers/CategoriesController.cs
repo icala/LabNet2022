@@ -44,24 +44,23 @@ namespace Lab.Demo.EF.API.Controllers
         }
 
         // POST: api/Categories
-        public IHttpActionResult Post([FromBody] CategoriesDTO category)
+        public async Task<IHttpActionResult> Post([FromBody] CategoriesDTO category)
         {
-            var idNuevo = categoriesLogic.GetNextId();
             var nuevaCategoria = new Categories()
             {
-                CategoryID = idNuevo,
+                CategoryID = 0,
                 CategoryName = category.CategoryName,
                 Description = category.Description,
             };
-            categoriesLogic.Add(nuevaCategoria);
-            category.CategoryID = idNuevo;
+            await categoriesLogic.AddAsync(nuevaCategoria);
+            category.CategoryID = nuevaCategoria.CategoryID;
             // Supongo que aca tengo que devolver el dto de categoria y no la entidad categoria creada
             // por eso reemplazo el id del dto pasado como parametro
             return Created("categories", category);
         }
 
         // PATCH: api/Categories/5
-        public IHttpActionResult Patch(int id, [FromBody] CategoriesDTO category)
+        public async Task<IHttpActionResult> Patch(int id, [FromBody] CategoriesDTO category)
         {
             if (id != category.CategoryID) return BadRequest("No coincide el id de la ruta con el id de la categoria");
             try
@@ -72,7 +71,7 @@ namespace Lab.Demo.EF.API.Controllers
                     CategoryName = category.CategoryName,
                     Description = category.Description
                 };
-                categoriesLogic.Update(categoriaModificada);
+                await categoriesLogic.UpdateAsync(categoriaModificada);
                 return Ok();
             }
             catch (IdCategoryNotFoundException e1)
@@ -86,12 +85,11 @@ namespace Lab.Demo.EF.API.Controllers
         }
 
         // DELETE: api/Categories/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             try
             {
-                categoriesLogic.Delete(id);
-
+                await categoriesLogic.DeleteAsync(id);
                 return Ok();
             }
 

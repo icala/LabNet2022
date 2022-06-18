@@ -124,8 +124,7 @@ namespace Lab.Demo.EF.Logic
             Console.WriteLine("Introduzca descripcion:");
             var descripcionNueva = Console.ReadLine();
             CategoriesLogic categoriesLogic = new CategoriesLogic();
-            var idNuevo = categoriesLogic.GetNextId();
-            categoriesLogic.Add(new Categories() { CategoryID = idNuevo, CategoryName = nombreNuevo, Description = descripcionNueva, });
+            categoriesLogic.Add(new Categories() { CategoryID = 0, CategoryName = nombreNuevo, Description = descripcionNueva, });
         }
 
         private void BorrarCategoria()

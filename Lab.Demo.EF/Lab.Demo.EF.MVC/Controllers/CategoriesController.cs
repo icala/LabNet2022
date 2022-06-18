@@ -36,7 +36,8 @@ namespace Lab.Demo.EF.MVC.Controllers
             var category = categoriesLogic.GetCategoryById(id);
             var products = productsLogic.GetFromCategory(id);
             var productsDTO = products.Select(p => new ProductsDTO(p)).ToList();
-            var model = new CategoriesDatailsDTO() {
+            var model = new CategoriesDatailsDTO()
+            {
                 Category = new CategoriesDTO(category),
                 Products = productsDTO
             };
@@ -55,10 +56,12 @@ namespace Lab.Demo.EF.MVC.Controllers
         {
             try
             {
-                var idNuevo = categoriesLogic.GetNextId();
-                categoriesLogic.Add(new Categories() { CategoryID = idNuevo, CategoryName = category.CategoryName, Description = category.Description, });
-
-
+                categoriesLogic.Add(new Categories()
+                {
+                    CategoryID = 0,
+                    CategoryName = category.CategoryName,
+                    Description = category.Description,
+                });
                 return RedirectToAction("Index");
             }
             catch
