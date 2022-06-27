@@ -1,0 +1,52 @@
+<div class="container">
+  <br />
+  <div class="container"><h1>Crear nueva categoria</h1></div>
+  <form [formGroup]="form" (ngSubmit)="onSubmitCrear()">
+    <div class="formGroup">
+      <mat-form-field appearance="standard">
+        <mat-label>Nombre</mat-label>
+        <input
+          class="form-comtrol"
+          matInput
+          maxlength="15"
+          placeholder="Nombre de la Categoria"
+          formControlName="name"
+          #nameInput
+        />
+        <mat-error>El nombre es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="formGroup">
+      <mat-form-field appearance="standard">
+        <mat-label>Descripción</mat-label>
+        <input
+          matInput
+          placeholder="Descripción de la Categoria"
+          formControlName="description"
+          #nameInput
+        />
+      </mat-form-field>
+    </div>
+    <br />
+    <div>
+      <button
+        class="mr-1"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Crear
+      </button>
+      <button mat-raised-button color="warn" type="button" (click)="limpiar()">
+        Limpiar
+      </button>
+    </div>
+    <br />
+  </form>
+  <div>
+    <a routerLink="/lista">
+      <img src="assets/backButton.jpg" width="200px" />
+    </a>
+  </div>
+</div>
